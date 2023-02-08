@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    tools {
+        maven "maven"
+        jdk "JDK"
+    }
+    stages {
+        stage('Initialize'){
+            steps{
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('springboottest'){
+                sh 'mvn -B -DskipTests clean package'
+                }
+            }
+       }
+        stage('Test') {
+            steps {
+                dir('springboottest'){
+                sh 'mvn test'
+                }
+            }
+       }
+        stage('Install') {
+            steps {
+                dir('springboottest'){
+                sh 'mvn -B -DskipTests clean install'
+                }
+            }
+       }
+        stage('Build Docker Image'){
+            steps{
+                dir('springboottest'){
+                    sh 'docker build -t jenkins/springboottest-docker-image .'
+                }
+            }
+		}	
+    }
+}
