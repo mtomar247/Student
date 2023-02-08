@@ -50,8 +50,8 @@ pipeline {
 	stage('Pushing to ECR') {
      	    steps{  
                script {
-                sh """docker tag springboottest-docker-image:latest 780315893543.dkr.ecr.us-east-1.amazonaws.com/springboottest-docker-image:latest"""
-                sh """docker push 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr:latest"""
+                sh """docker tag springboottest-docker-image:latest 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr"""
+                sh """docker push 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr"""
          }
         }
       }   
