@@ -38,6 +38,14 @@ pipeline {
                     sh 'docker build -t jenkins/springboottest-docker-image .'
                 }
             }
-		}	
+	}
+	stage('Pushing to ECR') {
+     	    steps{  
+               script {
+                sh """docker tag minakshi-ecr:latest 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr:latest"""
+                sh """docker push 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr:latest"""
+         }
+        }
+      }   
     }
 }
