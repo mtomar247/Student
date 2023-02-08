@@ -11,24 +11,12 @@ pipeline {
                 echo "M2_HOME = /opt/maven"
             }
         }
-        stage('Build') {
+        stage('Maven Build Test Install') {
             steps {
                 dir('springboottest'){
                 sh 'mvn -B -DskipTests clean package'
-                }
-            }
-       }
-        stage('Test') {
-            steps {
-                dir('springboottest'){
-                sh 'mvn test'
-                }
-            }
-       }
-        stage('Install') {
-            steps {
-                dir('springboottest'){
-                sh 'mvn -B -DskipTests clean install'
+		sh 'mvn test'
+		sh 'mvn -B -DskipTests clean install'
                 }
             }
        }
