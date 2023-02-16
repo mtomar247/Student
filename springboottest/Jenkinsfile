@@ -20,15 +20,15 @@ pipeline {
                 }
             }
        }
-	 stage('Sonar Scan'){
-		 steps{
-			 dir('springboottest'){
-			 withSonarQubeEnv('sonarqube'){
-		 sh 'mvn sonar:sonar'
-		 }
-	    }
-	 }
-	 }
+	//stage('Sonar Scan'){
+	//	 steps{
+	//		 dir('springboottest'){
+	//		 withSonarQubeEnv('sonarqube'){
+	//	 sh 'mvn sonar:sonar'
+	//	 }
+	 //   }
+	// }
+	 //}
         stage('Build Docker Image'){
             steps{
                 dir('springboottest'){
@@ -51,7 +51,11 @@ pipeline {
                 sh """docker push 780315893543.dkr.ecr.us-east-1.amazonaws.com/minakshi-ecr"""
          }
         }
-      }   
+      } 
+	        stage("kubernetes deployment"){
+        sh 'kubectl apply -f k8s-spring-boot-deployment.yml'
+    }
+} 
     }
 }
 
