@@ -55,7 +55,7 @@ pipeline {
 	        stage("kubernetes deployment"){
 			steps{
 				script{
-		sh aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
+		sh 'aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster'
         sh 'kubectl apply -f Deployment.yml'
     }
 } 
