@@ -57,7 +57,7 @@ pipeline {
 				script{
 					dir('springboottest'){
 		sh 'aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster'
-        sh 'kubectl apply -f Deployment.yml'
+        sh 'kubectl apply -f Deployment.yaml'
     }
 				}
 } 
